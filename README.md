@@ -1,7 +1,3 @@
-Com certeza! Um bom README.md é o cartão de visitas do seu projeto. Ele deve explicar o que o projeto faz, as tecnologias usadas e como outra pessoa (ou o "você do futuro") pode rodá-lo.
-
-Baseado em tudo que construímos, aqui está uma sugestão de README.md profissional e completo para o estado atual do seu projeto. Você pode criar um arquivo chamado README.md na raiz do seu projeto e colar o texto abaixo.
-
 CinemaSystemSpring API
 Bem-vindo à API do CinemaSystemSpring, um sistema de backend para gerenciamento de um cinema, incluindo catálogo de filmes, sessões e compra de ingressos.
 
