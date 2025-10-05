@@ -11,7 +11,7 @@ import java.util.List;
 public interface MovieSessionRepository extends JpaRepository<MovieSession, Long> {
 
 
-    List<MovieSession> findMovieById(Long movieId);
+    List<MovieSession> findByMovieId(Long movieId);
 
 }
 

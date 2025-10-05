@@ -1,9 +1,7 @@
 package com.cinemasystemspring.controller;
 
-import com.cinemasystemspring.dto.CreateMovieRequestDTO;
 import com.cinemasystemspring.dto.CreateSessionRequestDTO;
 import com.cinemasystemspring.dto.MovieSessionDTO;
-import com.cinemasystemspring.model.Movie;
 import com.cinemasystemspring.service.MovieSessionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -19,6 +17,7 @@ public class MovieSessionController {
     @Autowired
     private MovieSessionService sessionService;
 
+
     @PostMapping
     public ResponseEntity<MovieSessionDTO> createSessionForMovie(@PathVariable Long movieId, @RequestBody CreateSessionRequestDTO requestDTO) {
 
@@ -32,5 +31,25 @@ public class MovieSessionController {
     public ResponseEntity<List<MovieSessionDTO>> getAllSessionsForMovie(@PathVariable Long movieId){
         List<MovieSessionDTO> sessions = sessionService.findAllSessionsForMovie(movieId);
         return ResponseEntity.ok(sessions);
+
     }
+
+    @PutMapping("/{sessionId}")
+    public ResponseEntity<MovieSessionDTO> updateSession(
+            @PathVariable Long movieId,
+            @PathVariable Long sessionId,
+            @RequestBody CreateSessionRequestDTO requestDTO) {
+
+        MovieSessionDTO updatedSession = sessionService.updateSession(movieId, sessionId, requestDTO);
+        return ResponseEntity.ok(updatedSession);
+    }
+
+    @DeleteMapping("/{sessionId}")
+    public ResponseEntity<Void> deleteSession(@PathVariable Long movieId, @PathVariable Long sessionId){
+        sessionService.deleteSession(movieId, sessionId);
+
+        return ResponseEntity.noContent().build();
+    }
+
+
 }

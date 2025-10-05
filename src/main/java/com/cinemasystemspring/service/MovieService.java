@@ -55,7 +55,7 @@ public class MovieService {
 
     public void deleteMovie(Long id){
 
-        findMovieById(id);
+        findByMovieId(id);
         movieRepository.deleteById(id);
     }
 
@@ -68,7 +68,7 @@ public class MovieService {
     }
 
     @Transactional(readOnly = true)
-    public MovieDTO findMovieById(Long id){
+    public MovieDTO findByMovieId(Long id){
         Movie movie = findMovieEntityById(id);
         return convertToDTO(movie);
     }
@@ -88,6 +88,11 @@ public class MovieService {
                         sessionDTO.setId(session.getId());
                         sessionDTO.setSessionTime(session.getSessionTime());
                         sessionDTO.setScreenNumber(session.getScreenNumber());
+
+                        sessionDTO.setMovieTitle(movie.getTitle());
+                        sessionDTO.setMovieDirector(movie.getDirector());
+                        sessionDTO.setMovieDurationInMinutes(movie.getDurationInMinutes());
+
                         return sessionDTO;
                 })
                 .collect(Collectors.toList()) : List.of();

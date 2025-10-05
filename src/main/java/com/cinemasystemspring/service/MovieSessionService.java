@@ -8,8 +8,12 @@ import com.cinemasystemspring.model.Movie;
 import com.cinemasystemspring.model.MovieSession;
 import com.cinemasystemspring.repository.MovieSessionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -40,10 +44,48 @@ public class MovieSessionService {
         return convertToDTO(savedSession);
     }
 
+    public MovieSessionDTO updateSession(
+            @PathVariable Long movieId,
+            @PathVariable Long sessionId,
+            @RequestBody CreateSessionRequestDTO requestDTO) {
+
+        MovieSession existingSession = sessionRepository.findById(sessionId)
+                .orElseThrow(() -> new RuntimeException("Sessão não encontrada com o id: " + sessionId));
+
+        if (!existingSession.getMovie().getId().equals(movieId)) {
+            throw new RuntimeException("Conflito: A sessão " + sessionId + "não pertence ao Filme " + movieId);
+        }
+
+        if (requestDTO.getSessionTime() != null) {
+            existingSession.setSessionTime(requestDTO.getSessionTime());
+        }
+        if (requestDTO.getScreenNumber() != null) {
+            existingSession.setScreenNumber(requestDTO.getScreenNumber());
+        }
+
+        MovieSession updatedSession = sessionRepository.save(existingSession);
+
+        return convertToDTO(updatedSession);
+    }
+
+
+
+
+    public void deleteSession(Long movieId, Long sessionId) {
+        MovieSession session = sessionRepository.findById(sessionId)
+                .orElseThrow(() -> new RuntimeException("Sessão não encontrada com o id: " + sessionId));
+
+        if (!session.getMovie().getId().equals(movieId)){
+            throw new RuntimeException("Conflito: A sessão " + sessionId + " não pertence ao filme " + movieId);
+        }
+
+        sessionRepository.delete(session);
+    }
+
     public List<MovieSessionDTO> findAllSessionsForMovie(Long movieId){
         movieService.findMovieEntityById(movieId);
 
-        return sessionRepository.findMovieById(movieId)
+        return sessionRepository.findByMovieId(movieId)
                 .stream()
                 .map(this::convertToDTO)
                 .collect(Collectors.toList());
@@ -62,3 +104,4 @@ public class MovieSessionService {
     }
 
 }
+

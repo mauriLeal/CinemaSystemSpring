@@ -27,7 +27,7 @@ public class MovieController {
 
     @GetMapping("/{id}")
     public ResponseEntity<MovieDTO> getMovie(@PathVariable Long id){
-        MovieDTO movieDTO = movieService.findMovieById(id);
+        MovieDTO movieDTO = movieService.findByMovieId(id);
         return ResponseEntity.ok(movieDTO);
     }
 
@@ -39,7 +39,7 @@ public class MovieController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<MovieDTO> updateMovie(@PathVariable Long id, UpdateMovieRequestDTO movieRequest){
+    public ResponseEntity<MovieDTO> updateMovie(@PathVariable Long id, @RequestBody UpdateMovieRequestDTO movieRequest){
         MovieDTO updateMovie = movieService.updateMovie(id, movieRequest);
         return ResponseEntity.ok(updateMovie);
     }
