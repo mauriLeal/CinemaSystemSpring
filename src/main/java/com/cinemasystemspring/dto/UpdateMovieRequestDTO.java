@@ -11,4 +11,3 @@ public class UpdateMovieRequestDTO {
     private Integer durationInMinutes;
 
 }
-

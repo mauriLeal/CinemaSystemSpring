@@ -24,18 +24,16 @@ public class MovieController {
         return movieService.findAllMovies();
     }
 
+    @PostMapping
+    public ResponseEntity<MovieDTO> createMovie(@RequestBody CreateMovieRequestDTO movieRequest){
+        MovieDTO createdMovieDTO = movieService.createMovie(movieRequest);
+        return ResponseEntity.status(HttpStatus.CREATED).body(createdMovieDTO);
+    }
 
     @GetMapping("/{id}")
     public ResponseEntity<MovieDTO> getMovie(@PathVariable Long id){
         MovieDTO movieDTO = movieService.findByMovieId(id);
         return ResponseEntity.ok(movieDTO);
-    }
-
-
-    @PostMapping
-    public ResponseEntity<MovieDTO> createMovie(@RequestBody CreateMovieRequestDTO movieRequest){
-        MovieDTO createdMovieDTO = movieService.createMovie(movieRequest);
-        return ResponseEntity.status(HttpStatus.CREATED).body(createdMovieDTO);
     }
 
     @PutMapping("/{id}")

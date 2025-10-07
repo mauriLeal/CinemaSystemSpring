@@ -69,8 +69,6 @@ public class MovieSessionService {
     }
 
 
-
-
     public void deleteSession(Long movieId, Long sessionId) {
         MovieSession session = sessionRepository.findById(sessionId)
                 .orElseThrow(() -> new RuntimeException("Sessão não encontrada com o id: " + sessionId));
@@ -91,7 +89,12 @@ public class MovieSessionService {
                 .collect(Collectors.toList());
     }
 
-    private MovieSessionDTO convertToDTO(MovieSession session) {
+    public MovieSession findSessionEntityById(Long id){
+        return sessionRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Sessão não encontrada com o id "+id));
+    }
+
+    public MovieSessionDTO convertToDTO(MovieSession session) {
         MovieSessionDTO dto = new MovieSessionDTO();
         dto.setId(session.getId());
         dto.setSessionTime(session.getSessionTime());

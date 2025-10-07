@@ -55,6 +55,11 @@ public class UserService {
 
     }
 
+    public User findUserEntityById(Long id){
+        return userRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Usuário não encontrado com o id "+ id));
+    }
+
     public User saveUser(User user){
 
         // hash senha aqui
