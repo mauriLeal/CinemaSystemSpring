@@ -9,5 +9,4 @@ public class CinemaSystemSpringApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(CinemaSystemSpringApplication.class, args);
 	}
-
 }
