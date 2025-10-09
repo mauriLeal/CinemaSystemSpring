@@ -35,5 +35,4 @@ public class User {
     @ToString.Exclude
     private List<Purchase> purchases;
 
-
 }

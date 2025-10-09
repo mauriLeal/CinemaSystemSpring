@@ -3,9 +3,7 @@ package com.cinemasystemspring.controller;
 
 import com.cinemasystemspring.dto.CreatePurchaseRequestDTO;
 import com.cinemasystemspring.dto.PurchaseDTO;
-import com.cinemasystemspring.model.Purchase;
 import com.cinemasystemspring.service.PurchaseService;
-import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

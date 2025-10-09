@@ -52,7 +52,6 @@ public class UserService {
     public List<User> findAllUsers(){
 
         return userRepository.findAll();
-
     }
 
     public User findUserEntityById(Long id){
