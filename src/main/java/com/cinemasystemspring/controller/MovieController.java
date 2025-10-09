@@ -3,7 +3,6 @@ package com.cinemasystemspring.controller;
 import com.cinemasystemspring.dto.CreateMovieRequestDTO;
 import com.cinemasystemspring.dto.MovieDTO;
 import com.cinemasystemspring.dto.UpdateMovieRequestDTO;
-import com.cinemasystemspring.model.Movie;
 import com.cinemasystemspring.service.MovieService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

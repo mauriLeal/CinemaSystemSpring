@@ -33,7 +33,6 @@ public class MovieService {
 
     }
 
-
     public MovieDTO updateMovie(Long id, UpdateMovieRequestDTO requestDTO){
         Movie existingMovie = findMovieEntityById(id);
 
